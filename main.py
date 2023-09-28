@@ -1,15 +1,25 @@
 import bot
 import message
-import yaml
+from ics import Calendar, Event
 
 
-def get_token():
-    pass
+# const of project directory
+DIR = None
 
 
 def main():
-    pass
+
+    # Temporary calendar-file creation for testing purposes
+    calendar = Calendar()
+    event = Event()
+    event.name = "test"
+    event.begin = "2023-10-10 12:00:00"
+    event.end = "2023-10-10 13:00:00"
+    calendar.events.add(event)
+    print(calendar.events)
+    with open(f"data/events/{event.name}.ics", "w") as f:
+        f.writelines(calendar.serialize_iter())
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

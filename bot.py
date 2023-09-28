@@ -1,4 +1,5 @@
 from ics import Calendar, Event
+import telegram
 
 
 class bot:
