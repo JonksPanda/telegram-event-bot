@@ -11,16 +11,18 @@ class Config:
         self.token = token
 
         if self.yaml_exists:
-            print("reading settings from config file..")
             self.read_yaml()
         else:
-            print("no config file found! Generating new file on /config/conf.yaml")
             self.create_yaml()
 
     def read_yaml(self):
-        pass
+        print("reading settings from config file..")
+        with open(self.YAML_PATH, "r") as f:
+            print(yaml.load(f, Loader=yaml.FullLoader))
 
     def create_yaml(self):
-        yaml_input = [{"token": self.token}]
-        with open(self.YAML_PATH, "w") as file:
-            yaml.dump(yaml_input, file)
+        print("no config file found! Generating new file on ./config/conf.yaml")
+        yaml_input = [{"credentials": {"token": self.token}}]
+        with open(self.YAML_PATH, "w") as f:
+            yaml.dump(yaml_input, f)
+        self.read_yaml()
